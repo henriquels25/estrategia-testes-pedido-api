@@ -1,0 +1,25 @@
+<configuration debug="true">
+
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+        <encoder>
+            <pattern>%date %highlight(%-5level) %cyan(%-40.40logger{39}) %boldGreen([%X{traceId} %X{spanId}]) %message %n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="GELF" class="de.siegmar.logbackgelf.GelfTcpAppender">
+        <encoder class="de.siegmar.logbackgelf.GelfEncoder">
+            <includeMdcData>true</includeMdcData>
+            <includeLevelName>true</includeLevelName>
+        </encoder>
+
+        <graylogHost>localhost</graylogHost>
+        <graylogPort>12201</graylogPort>
+    </appender>
+
+    <root>
+        <appender-ref ref="GELF" />
+        <appender-ref ref="STDOUT" />
+    </root>
+
+</configuration>
