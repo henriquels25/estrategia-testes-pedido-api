@@ -19,7 +19,7 @@ public class PedidoService {
     private final PedidoRepository pedidoRepository;
 
     @SneakyThrows
-    public void cria(Pedido pedido){
+    public Long cria(Pedido pedido){
         log.info("Iniciando criação de pedido");
 
         for (var item : pedido.itens()) {
@@ -31,6 +31,7 @@ public class PedidoService {
         }
         Long pedidoId = pedidoRepository.save(pedido);
         pedidoCriadoProducer.sendPedidoCriadoMessage(pedidoId);
+        return pedidoId;
     }
 
 }

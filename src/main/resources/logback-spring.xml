@@ -6,19 +6,7 @@
         </encoder>
     </appender>
 
-
-    <appender name="GELF" class="de.siegmar.logbackgelf.GelfTcpAppender">
-        <encoder class="de.siegmar.logbackgelf.GelfEncoder">
-            <includeMdcData>true</includeMdcData>
-            <includeLevelName>true</includeLevelName>
-        </encoder>
-
-        <graylogHost>localhost</graylogHost>
-        <graylogPort>12201</graylogPort>
-    </appender>
-
     <root>
-        <appender-ref ref="GELF" />
         <appender-ref ref="STDOUT" />
     </root>
 

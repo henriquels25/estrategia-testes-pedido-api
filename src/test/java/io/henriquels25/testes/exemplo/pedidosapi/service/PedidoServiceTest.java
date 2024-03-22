@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static io.henriquels25.testes.exemplo.pedidosapi.utils.TestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -32,28 +33,18 @@ class PedidoServiceTest {
     @InjectMocks
     private PedidoService pedidoService;
 
-    private static final String PRODUTO_ID_1 = "1";
-    private static final String PRODUTO_ID_2 = "2";
-
-    private static final String CLIENTE_ID = "CLIENTE_1";
-    private static final String ENDERECO = "XXXXXXXXXX";
-
     @Test
     void deveriaCriarUmPedidoQuandoTodosItensPossuemEstoque() {
         Long pedidoId = 1L;
 
-        ItemPedido itemPedido1 = new ItemPedido(PRODUTO_ID_1, 2);
-        ItemPedido itemPedido2 = new ItemPedido(PRODUTO_ID_2, 1);
-
-        Pedido pedido = new Pedido(CLIENTE_ID, List.of(itemPedido1, itemPedido2), ENDERECO);
-        when(pedidoRepository.save(pedido)).thenReturn(pedidoId);
+        when(pedidoRepository.save(PEDIDO)).thenReturn(pedidoId);
         when(estoqueClient.get(PRODUTO_ID_1)).thenReturn(new EstoqueResponse(PRODUTO_ID_1, 10L));
         when(estoqueClient.get(PRODUTO_ID_2)).thenReturn(new EstoqueResponse(PRODUTO_ID_2, 10L));
 
-        pedidoService.cria(pedido);
+        pedidoService.cria(PEDIDO);
 
         verify(pedidoCriadoProducer).sendPedidoCriadoMessage(pedidoId);
-        verify(pedidoRepository).save(pedido);
+        verify(pedidoRepository).save(PEDIDO);
     }
 
     @Test
