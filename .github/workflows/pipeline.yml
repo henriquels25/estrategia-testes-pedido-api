@@ -1,9 +1,9 @@
-name: Flight API Pipeline
+name: Pedido API Pipeline
 
 on: [ push ]
 
 jobs:
-  test-and-sonar:
+  test:
     runs-on: ubuntu-latest
 
     steps:
