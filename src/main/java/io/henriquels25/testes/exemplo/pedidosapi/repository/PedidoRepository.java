@@ -12,7 +12,7 @@ public class PedidoRepository {
     private final PedidoMapper pedidoMapper;
 
     public Long save(Pedido pedido) {
-        PedidoEntity pedidoEntity = pedidoMapper.PedidoToPedidoEntity(pedido);
+        PedidoEntity pedidoEntity = pedidoMapper.pedidoToPedidoEntity(pedido);
         for (ItemPedidoEntity itemPedidoEntity : pedidoEntity.getItens()){
             itemPedidoEntity.setPedido(pedidoEntity);
         }

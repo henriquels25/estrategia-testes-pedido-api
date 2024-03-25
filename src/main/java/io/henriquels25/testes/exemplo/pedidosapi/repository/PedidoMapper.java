@@ -7,6 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface PedidoMapper {
 
-    PedidoEntity PedidoToPedidoEntity(Pedido pedido);
+    PedidoEntity pedidoToPedidoEntity(Pedido pedido);
     ItemPedidoEntity map(ItemPedido itemPedido);
 }
